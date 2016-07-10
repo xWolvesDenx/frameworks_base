@@ -29,4 +29,8 @@
 
     <!-- kill app long press back -->
     <integer name="config_backKillTimeout">1000</integer>
+
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>
