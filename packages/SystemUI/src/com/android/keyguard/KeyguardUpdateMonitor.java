@@ -916,7 +916,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
 
         public boolean isUnlockingWithFingerprintAllowed() {
             int userId = getCurrentUser();
-            return true;
+            return isFingerprintAllowedForUser(userId);
         }
 
         public boolean hasUserAuthenticatedSinceBoot() {
