@@ -64,9 +64,6 @@
         <item>space</item>
     </string-array>
 
-    <string name="screenshot_abort_title">No screenshot taken</string>
-    <string name="screenshot_abort_text">Operation aborted.</string>
-
     <string name="statusbar_items_title">Statusbar icon</string>
 
     <!-- Screenshot QS tile -->
