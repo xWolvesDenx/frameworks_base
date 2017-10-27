@@ -657,6 +657,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
      * resource qualifier. */
     public static final int UI_MODE_NIGHT_YES = 0x20;
 
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the
+     * <a href="{@docRoot}guide/topics/resources/providing-resources.html#NightQualifier">night</a>
+     * resource qualifier. */
+    public static final int UI_MODE_NIGHT_RETRO = 0x30;
+
     /**
      * Bit mask of the ui mode.  Currently there are two fields:
      * <p>The {@link #UI_MODE_TYPE_MASK} bits define the overall ui mode of the
@@ -1005,6 +1011,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case UI_MODE_NIGHT_UNDEFINED: sb.append(" ?night"); break;
             case UI_MODE_NIGHT_NO: /* not-night is not interesting to print */ break;
             case UI_MODE_NIGHT_YES: sb.append(" night"); break;
+            case UI_MODE_NIGHT_RETRO: sb.append(" retro"); break;
             default: sb.append(" night="); sb.append(uiMode&UI_MODE_NIGHT_MASK); break;
         }
         switch (touchscreen) {
@@ -2029,6 +2036,9 @@ public final class Configuration implements Parcelable, Comparable<Configuration
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
                 parts.add("notnight");
+                break;
+            case Configuration.UI_MODE_NIGHT_RETRO:
+                parts.add("retro");
                 break;
             default:
                 break;
