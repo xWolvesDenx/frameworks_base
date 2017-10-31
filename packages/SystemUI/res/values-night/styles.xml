@@ -60,6 +60,7 @@
         <item name="android:alertDialogTheme">@*com.android.systemui:style/Theme.SystemUI.Dialog.Alert</item>
     </style>
     <style name="Theme.SystemUI.Dialog" parent="@*android:style/Theme.Material.Dialog" />
+
     <style name="Theme.SystemUI.Dialog.Alert" parent="@*android:style/Theme.Material.Dialog.Alert" />
     <style name="Widget.Leanback.OnboardingStartButtonStyle" parent="@*com.android.systemui:style/Widget.Leanback">
         <item name="android:textSize">16.0sp</item>

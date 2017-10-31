@@ -218,23 +218,6 @@
         <item name="android:textColorPrimary">#ffffffff</item>
         <item name="android:textColorSecondary">#ffdddddd</item>
     </style>
-    <style name="Theme.Material.DayNight" parent="@*android:style/Theme.Material" />
-    <style name="Theme.Material.DayNight.DarkActionBar" parent="@*android:style/Theme.Material" />
-    <style name="Theme.Material.DayNight.Dialog.MinWidth" parent="@*android:style/Theme.Material.Dialog.MinWidth" />
-    <style name="Theme.Material.DayNight.Dialog.NoActionBar" parent="@*android:style/Theme.Material.Dialog.NoActionBar" />
-    <style name="Theme.Material.DayNight.Dialog.NoActionBar.MinWidth" parent="@*android:style/Theme.Material.Dialog.NoActionBar.MinWidth" />
-    <style name="Theme.Material.DayNight.Dialog.Presentation" parent="@*android:style/Theme.Material.Dialog.Presentation" />
-    <style name="Theme.Material.DayNight.DialogWhenLarge" parent="@*android:style/Theme.Material.DialogWhenLarge" />
-    <style name="Theme.Material.DayNight.DialogWhenLarge.NoActionBar" parent="@*android:style/Theme.Material.DialogWhenLarge.NoActionBar" />
-    <style name="Theme.Material.DayNight.NoActionBar" parent="@*android:style/Theme.Material.NoActionBar" />
-    <style name="Theme.Material.DayNight.NoActionBar.Fullscreen" parent="@*android:style/Theme.Material.NoActionBar.Fullscreen" />
-    <style name="Theme.Material.DayNight.NoActionBar.Overscan" parent="@*android:style/Theme.Material.NoActionBar.Overscan" />
-    <style name="Theme.Material.DayNight.NoActionBar.TranslucentDecor" parent="@*android:style/Theme.Material.NoActionBar.TranslucentDecor" />
-    <style name="Theme.Material.DayNight.Panel" parent="@*android:style/Theme.Material.Panel" />
-    <style name="Theme.Material.DayNight.BaseDialog" parent="@*android:style/Theme.Material.Dialog" />
-    <style name="Theme.Material.DayNight.Dialog.FixedSize" parent="@style/Theme.Material.DayNight.Dialog.NoActionBar.FixedSize" />
-    <style name="Theme.Material.DayNight.Dialog.NoActionBar.FixedSize" parent="@*android:style/Theme.Material.Dialog" />
-    <style name="Theme.Material.DayNight.Dialog.BaseAlert" parent="@*android:style/Theme.Material.Dialog" />
 
     <style name="TextAppearance.Material.Notification.Reply" parent="@*android:style/TextAppearance.Material.Notification">
         <item name="android:textColor">#ffffffff</item>

@@ -12,9 +12,9 @@
 
     <color name="dslv_icon_dark">#ffffffff</color>
 
-    <color name="holo_blue_light">#009688</color>
-    <color name="holo_blue_dark">#009688</color>
-    <color name="holo_blue_bright">#009688</color>
+    <color name="holo_blue_light">#cc0000</color>
+    <color name="holo_blue_dark">#cc0000</color>
+    <color name="holo_blue_bright">#cc0000</color>
  
    <color name="micro_text_light">#ffffff</color>
 
@@ -28,7 +28,7 @@
     <color name="notification_mtrl_big_picture_bg">#ff111111</color>
     <color name="notification_mtrl_action_text_light">#ffffffff</color>
 
-    <color name="system_notification_accent_color">#009688</color>
+    <color name="system_notification_accent_color">#cc0000</color>
 
     <color name="highlighted_text_holo_dark">#66ffffff</color>
     <color name="highlighted_text_holo_light">#66ffffff</color>
@@ -64,8 +64,8 @@
 
     <color name="resolver_list_bg">#000000</color> <!-- Background colour for the bottom sheet to choose which app to use to open certain items --> 
 
-    <color name="global_menu_icon">#30009688</color>
-    <color name="global_menu_icon_enabled">#009688</color>
+    <color name="global_menu_icon">#30cc0000</color>
+    <color name="global_menu_icon_enabled">#cc0000</color>
 
     <color name="chooser_grid_bg">#000000</color>
 
@@ -88,40 +88,41 @@
 
     <color name="notification_material_background_color">#000000</color>
     <color name="notification_action_list">#000000</color> <!-- The REPLY background in a notification -->
-    <color name="notification_default_color">#009688</color>
-    <color name="notification_icon_default_color">#009688</color>
-    <color name="notification_text_default_color">#009688</color>
+    <color name="notification_default_color">#cc0000</color>
+    <color name="notification_icon_default_color">#cc0000</color>
+    <color name="notification_text_default_color">#cc0000</color>
 
     <color name="chooser_service_row_background_color">#000000</color>
 
-    <color name="material_deep_teal_100">#009688</color>
-    <color name="material_deep_teal_300">#009688</color>
+    <color name="material_deep_teal_100">#cc0000</color>
+    <color name="material_deep_teal_200">#cc0000</color>
+    <color name="material_deep_teal_300">#cc0000</color>
 
-    <color name="user_icon_default_gray">#009688</color>
-    <color name="user_icon_default_white">#009688</color>
+    <color name="user_icon_default_gray">#cc0000</color>
+    <color name="user_icon_default_white">#cc0000</color>
 
-    <color name="app_permission_icon_tint">#009688</color>
+    <color name="app_permission_icon_tint">#cc0000</color>
 
-    <color name="notification_title_text">#009688</color>
-    <color name="notification_content_text">#009688</color>
+    <color name="notification_title_text">#cc0000</color>
+    <color name="notification_content_text">#cc0000</color>
 
-    <color name="primary_text_holo_light">#009688</color>
-    <color name="primary_text_nodisable_holo_light">#009688</color>
-    <color name="primary_text_disable_only_holo_dark">#009688</color>
-    <color name="primary_text_disable_only_holo_light">#009688</color>
-    <color name="primary_text_nodisable_holo_dark">#009688</color>
+    <color name="primary_text_holo_light">#cc0000</color>
+    <color name="primary_text_nodisable_holo_light">#cc0000</color>
+    <color name="primary_text_disable_only_holo_dark">#cc0000</color>
+    <color name="primary_text_disable_only_holo_light">#cc0000</color>
+    <color name="primary_text_nodisable_holo_dark">#cc0000</color>
 
-    <color name="legacy_control_activated">#009688</color>
-    <color name="legacy_button_pressed">#009688</color>
-    <color name="legacy_light_control_activated">#009688</color>
-    <color name="legacy_light_button_pressed">#009688</color>
+    <color name="legacy_control_activated">#cc0000</color>
+    <color name="legacy_button_pressed">#cc0000</color>
+    <color name="legacy_light_control_activated">#cc0000</color>
+    <color name="legacy_light_button_pressed">#cc0000</color>
 
-    <color name="holo_control_activated">#009688</color>
-    <color name="holo_light_control_activated">#009688</color>
+    <color name="holo_control_activated">#cc0000</color>
+    <color name="holo_light_control_activated">#cc0000</color>
 
-    <color name="accessibility_focus_highlight">#009688</color>
+    <color name="accessibility_focus_highlight">#cc0000</color>
 
-    <color name="sender_text_color">#009688</color>
+    <color name="sender_text_color">#cc0000</color>
 
     <color name="immersive_cling_bg_color">#ff00796b</color>
     <color name="immersive_cling_text_color">#ffffffff</color>
@@ -134,11 +135,11 @@
     <color name="primary_dark_device_default_settings">#000000</color>
     <color name="secondary_device_default_settings">#242424</color> 
 
-    <color name="tertiary_device_default_settings">#009688</color>
-    <color name="quaternary_device_default_settings">#009688</color>
+    <color name="tertiary_device_default_settings">#cc0000</color>
+    <color name="quaternary_device_default_settings">#cc0000</color>
 
-    <color name="accent_device_default_700">#009688</color>
-    <color name="accent_device_default_light">#009688</color>
-    <color name="accent_device_default_dark">#009688</color>
-    <color name="accent_device_default_50">#009688</color>
+    <color name="accent_device_default_700">#cc0000</color>
+    <color name="accent_device_default_light">#cc0000</color>
+    <color name="accent_device_default_dark">#cc0000</color>
+    <color name="accent_device_default_50">#cc0000</color>
 </resources>
