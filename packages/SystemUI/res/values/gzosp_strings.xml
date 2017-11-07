@@ -156,4 +156,10 @@
     <!-- Screenrecord Tile -->
     <string name="quick_settings_screenrecord">Screenrecord</string>
 
+    <string-array name="navArrowsExcludeList">
+        <item>chrome</item>
+        <item>youtube</item>
+        <item>netflix</item>
+    </string-array>
+
 </resources>
