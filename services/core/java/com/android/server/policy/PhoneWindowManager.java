@@ -227,7 +227,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.autofill.AutofillManagerInternal;
 import android.view.inputmethod.InputMethodManagerInternal;
-import android.widget.Toast;
 
 import com.android.internal.R;
 import com.android.internal.logging.MetricsLogger;
@@ -238,7 +237,6 @@ import com.android.internal.policy.IKeyguardService;
 import com.android.internal.policy.IShortcutService;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.util.gzosp.DeviceUtils;
 import com.android.internal.util.gzosp.GzospUtils;
 import com.android.internal.util.ScreenShapeHelper;
 import com.android.internal.widget.PointerLocationView;
@@ -509,7 +507,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     int[] mNavigationBarWidthForRotationDefault = new int[4];
     int[] mNavigationBarHeightForRotationInCarMode = new int[4];
     int[] mNavigationBarWidthForRotationInCarMode = new int[4];
-    private boolean mNavBarOverride;
 
     private LongSparseArray<IShortcutService> mShortcutKeyServices = new LongSparseArray<>();
 
@@ -628,8 +625,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mUseTvRouting;
 
     private boolean mHandleVolumeKeysInWM;
-
-    int mBackKillTimeout;
 
     int mDeviceHardwareKeys;
 
@@ -1104,9 +1099,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER), false, this,
-                    UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.NAVIGATION_BAR_ENABLED), false, this,
                     UserHandle.USER_ALL);
 
             updateSettings();
@@ -1858,16 +1850,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     private final ScreenshotRunnable mScreenshotRunnable = new ScreenshotRunnable();
-
-    Runnable mBackLongPress = new Runnable() {
-        public void run() {
-            if (DeviceUtils.killForegroundApplication(mContext)) {
-                performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, false);
-                Toast.makeText(mContext, R.string.app_killed_message, Toast.LENGTH_SHORT).show();
-                // Do nothing; just let it go.
-            }
-        }
-    };
     
     @Override
     public void showGlobalActions() {
@@ -2208,9 +2190,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         mHandleVolumeKeysInWM = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_handleVolumeKeysInWindowManager);
 
-        mBackKillTimeout = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_backKillTimeout);
-
         mDeviceHardwareKeys = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
 
@@ -2517,18 +2496,16 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // Allow the navigation bar to move on non-square small devices (phones).
         mNavigationBarCanMove = width != height && shortSizeDp < 600;
 
+        mHasNavigationBar = res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+
         // Allow a system property to override this. Used by the emulator.
         // See also hasNavigationBar().
         String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
         if ("1".equals(navBarOverride)) {
-            mNavBarOverride = true;
+            mHasNavigationBar = false;
         } else if ("0".equals(navBarOverride)) {
-            mNavBarOverride = false;
+            mHasNavigationBar = true;
         }
-        mHasNavigationBar = !mNavBarOverride && Settings.Secure.getIntForUser(
-                mContext.getContentResolver(), Settings.Secure.NAVIGATION_BAR_ENABLED,
-                res.getBoolean(com.android.internal.R.bool.config_showNavigationBar) ? 1 : 0,
-                UserHandle.USER_CURRENT) == 1;
 
         // For demo purposes, allow the rotation of the HDMI display to be controlled.
         // By default, HDMI locks rotation to landscape.
@@ -2670,17 +2647,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mVolumeAnswer = (Settings.System.getIntForUser(resolver,
                     Settings.System.ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER, 0, UserHandle.USER_CURRENT) == 1);
 
-            mHasNavigationBar = !mNavBarOverride && Settings.Secure.getIntForUser(
-                    resolver, Settings.Secure.NAVIGATION_BAR_ENABLED,
-                    mContext.getResources().getBoolean(
-                    com.android.internal.R.bool.config_showNavigationBar) ? 1 : 0,
-                    UserHandle.USER_CURRENT) == 1;
-            IStatusBarService sbar = getStatusBarService();
-            if (sbar != null) {
-                try {
-                    sbar.toggleNavigationBar(mHasNavigationBar);
-                } catch (RemoteException e1) {}
-            }
         }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
             PolicyControl.reloadFromSetting(mContext);
@@ -3789,10 +3755,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mPendingCapsLockToggle = false;
         }
 
-        if (keyCode == KeyEvent.KEYCODE_BACK && !down) {
-            mHandler.removeCallbacks(mBackLongPress);
-        }
-
         // First we always handle the home key here, so applications
         // can never break it, although if keyguard is on, we do let
         // it handle it, because that gives us the correct 5 second
@@ -4002,13 +3964,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mScreenshotRunnable.setScreenshotType(type);
                 mHandler.post(mScreenshotRunnable);
                 return -1;
-            }
-        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.KILL_APP_LONGPRESS_BACK, 0, UserHandle.USER_CURRENT) == 1) {
-                if (down && repeatCount == 0) {
-                    mHandler.postDelayed(mBackLongPress, mBackKillTimeout);
-                }
             }
         } else if (keyCode == KeyEvent.KEYCODE_SLASH && event.isMetaPressed()) {
             if (down && repeatCount == 0 && !isKeyguardLocked()) {

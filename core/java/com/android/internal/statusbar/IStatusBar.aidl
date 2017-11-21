@@ -120,5 +120,4 @@ oneway interface IStatusBar
      * Gzosp
      */
     void toggleCameraFlash();
-    void toggleNavigationBar(boolean enable);
 }

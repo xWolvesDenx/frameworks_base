@@ -4010,12 +4010,6 @@ public final class Settings {
 
         // CUSTOM system settings
         /**
-         * Double tap on navbar to sleep
-         * @hide
-         */
-        public static final String DOUBLE_TAP_SLEEP_NAVBAR = "double_tap_sleep_navbar";
-
-        /**
          * Change volume up and down handlign based on rotation
          * @hide
          */
@@ -4420,12 +4414,6 @@ public final class Settings {
          * @hide
          */
         public static final String RECENTS_ICON_PACK = "recents_icon_pack";
-
-        /**
-         * Whether to enable the pixel navbar animation
-         * @hide
-         */
-        public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
 
         /**
          * @hide
@@ -4838,7 +4826,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_TO_APP_ENABLED);
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
-            PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_NAVBAR);
             PRIVATE_SETTINGS.add(SWAP_VOLUME_BUTTONS);
             PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_MEDIA_STREAM);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
@@ -7549,12 +7536,6 @@ public final class Settings {
          */
         public static final String ASSISTANT = "assistant";
 
-         /**
-          * Whether to allow killing of the foreground app by long-pressing the Back button
-          * @hide
-          */
-         public static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
-
         /**
          * Whether the camera launch gesture should be disabled.
          *
@@ -7806,12 +7787,6 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_BATTERY_SAVER_COLOR = "status_bar_battery_saver_color";
-
-         /**
-         * Whether to enable navigation bar
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_ENABLED = "navigation_bar_enabled";
 
         /**
          * Whether to set a lower brightness level when enabling night mode

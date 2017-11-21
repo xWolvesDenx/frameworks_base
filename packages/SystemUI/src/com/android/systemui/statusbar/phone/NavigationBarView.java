@@ -31,8 +31,6 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -94,10 +92,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
     private KeyButtonDrawable mImeIcon;
     private KeyButtonDrawable mMenuIcon;
     private KeyButtonDrawable mAccessibilityIcon;
-    private KeyButtonDrawable mKbLeftIcon;
-    private KeyButtonDrawable mKbRightIcon;
-    private KeyButtonDrawable mSkipPrevIcon;
-    private KeyButtonDrawable mSkipNextIcon;
 
     private GestureHelper mGestureHelper;
     private DeadZone mDeadZone;
@@ -123,8 +117,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
     private NavigationBarInflaterView mNavigationInflaterView;
     private RecentsComponent mRecentsComponent;
     private Divider mDivider;
-    
-    private boolean mIsTrackPlaying;
 
     private class NavTransitionListener implements TransitionListener {
         private boolean mBackTransitioning;
@@ -229,10 +221,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         mButtonDispatchers.put(R.id.ime_switcher, new ButtonDispatcher(R.id.ime_switcher));
         mButtonDispatchers.put(R.id.accessibility_button,
                 new ButtonDispatcher(R.id.accessibility_button));
-        mButtonDispatchers.put(R.id.kb_left, new ButtonDispatcher(R.id.kb_left));
-        mButtonDispatchers.put(R.id.kb_right, new ButtonDispatcher(R.id.kb_right));
-        mButtonDispatchers.put(R.id.skip_prev, new ButtonDispatcher(R.id.skip_prev));
-        mButtonDispatchers.put(R.id.skip_next, new ButtonDispatcher(R.id.skip_next));
     }
 
     public BarTransitions getBarTransitions() {
@@ -308,22 +296,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         return mButtonDispatchers.get(R.id.accessibility_button);
     }
 
-    public ButtonDispatcher getKbLeftButton() {
-        return mButtonDispatchers.get(R.id.kb_left);
-    }
-
-    public ButtonDispatcher getKbRightButton() {
-        return mButtonDispatchers.get(R.id.kb_right);
-    }
-
-    public ButtonDispatcher getSkipPrevButton() {
-        return mButtonDispatchers.get(R.id.skip_prev);
-    }
-
-    public ButtonDispatcher getSkipNextButton() {
-        return mButtonDispatchers.get(R.id.skip_next);
-    }
-
     public SparseArray<ButtonDispatcher> getButtonDispatchers() {
         return mButtonDispatchers;
     }
@@ -366,14 +338,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
             Context lightContext = new ContextThemeWrapper(ctx, dualToneLightTheme);
             mImeIcon = getDrawable(darkContext, lightContext,
                     R.drawable.ic_ime_switcher_default, R.drawable.ic_ime_switcher_default);
-            mKbLeftIcon = getDrawable(darkContext, lightContext,
-                    R.drawable.ic_kb_left, R.drawable.ic_kb_left);
-            mKbRightIcon = getDrawable(darkContext, lightContext,
-                    R.drawable.ic_kb_right, R.drawable.ic_kb_right);
-            mSkipPrevIcon = getDrawable(darkContext, lightContext,
-                    R.drawable.ic_skip_previous, R.drawable.ic_skip_previous);
-            mSkipNextIcon = getDrawable(darkContext, lightContext,
-                    R.drawable.ic_skip_next, R.drawable.ic_skip_next);
 
             if (ALTERNATE_CAR_MODE_UI) {
                 updateCarModeIcons(ctx);
@@ -421,11 +385,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
                 : carMode ? mBackCarModeIcon : mBackIcon;
     }
 
-    public void setTrackPlaying(boolean isPlaying) {
-        mIsTrackPlaying =  isPlaying;
-        setNavigationIconHints(mNavigationIconHints, true);
-    }
-
     public void setNavigationIconHints(int hints, boolean force) {
         if (!force && hints == mNavigationIconHints) return;
         final boolean backAlt = (hints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
@@ -448,24 +407,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
                 : getBackIcon(mUseCarModeUi, mVertical);
 
         getBackButton().setImageDrawable(backIcon);
-
-        getKbLeftButton().setVisibility(backAlt ? View.VISIBLE : View.INVISIBLE);
-        getKbRightButton().setVisibility(backAlt ? View.VISIBLE : View.INVISIBLE);
-        getKbLeftButton().setImageDrawable(mKbLeftIcon);
-        getKbRightButton().setImageDrawable(mKbRightIcon);
-        getSkipPrevButton().setVisibility(backAlt || mIsTrackPlaying ? View.VISIBLE : View.INVISIBLE);
-        getSkipNextButton().setVisibility(backAlt || mIsTrackPlaying ? View.VISIBLE : View.INVISIBLE);
-        if (backAlt) {
-            getSkipPrevButton().setImageDrawable(mKbLeftIcon);
-            getSkipNextButton().setImageDrawable(mKbRightIcon);
-            getSkipPrevButton().setCode(21); // kb cursor left
-            getSkipNextButton().setCode(22); // kb cursor right
-        } else {
-            getSkipPrevButton().setImageDrawable(mSkipPrevIcon);
-            getSkipNextButton().setImageDrawable(mSkipNextIcon);
-            getSkipPrevButton().setCode(88); // prev track
-            getSkipNextButton().setCode(87); // next track
-        }
 
         updateRecentsIcon();
 
@@ -893,12 +834,6 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
 
     public interface OnVerticalChangedListener {
         void onVerticalChanged(boolean isVertical);
-    }
-
-    public void setDoubleTapToSleep() {
-        boolean isDoubleTapEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 1, UserHandle.USER_CURRENT) == 1;
-        ((NavigationBarFrame) getRootView()).setDoubleTapToSleep(isDoubleTapEnabled);
     }
 
 }

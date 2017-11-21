@@ -599,7 +599,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected PorterDuffXfermode mSrcOverXferMode =
             new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER);
 
-    private String[] mNavArrowsExcludeList;
     private MediaSessionManager mMediaSessionManager;
     private MediaController mMediaController;
     private String mMediaNotificationKey;
@@ -615,7 +614,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     clearCurrentMediaNotification();
                     updateMediaMetaData(true, true);
                 }
-                setTrackPlaying();
             }
         }
 
@@ -628,34 +626,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (mTickerEnabled == 2) {
                 tickTrackInfo();
             }
-            setTrackPlaying();
         }
 
-        @Override
-        public void onSessionDestroyed() {
-            super.onSessionDestroyed();
-            setTrackPlaying();
-        }
     };
-
-    private void setTrackPlaying() {
-        if (mNavigationBar != null) {
-            if (PlaybackState.STATE_PLAYING ==
-                    getMediaControllerPlaybackState(mMediaController)
-                    || PlaybackState.STATE_BUFFERING ==
-                    getMediaControllerPlaybackState(mMediaController)) {
-                final String currentPkg = mMediaController.getPackageName().toLowerCase();
-                for (String packageName : mNavArrowsExcludeList) {
-                    if (currentPkg.contains(packageName)) {
-                        return;
-                    }
-                }
-                mNavigationBar.setTrackPlaying(true);
-            } else {
-                mNavigationBar.setTrackPlaying(false);
-            }
-        }
-    }
 
     private void tickTrackInfo() {
         ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
@@ -1049,9 +1022,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         };
         Dependency.get(ConfigurationController.class).addCallback(mConfigurationListener);
-
-        mNavArrowsExcludeList = mContext.getResources().getStringArray(
-                R.array.navArrowsExcludeList);
     }
 
     protected void createIconController() {
@@ -2387,7 +2357,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 clearCurrentMediaNotification();
                 mMediaController = controller;
                 mMediaController.registerCallback(mMediaListener);
-                setTrackPlaying();
                 mMediaMetadata = mMediaController.getMetadata();
                 if (DEBUG_MEDIA) {
                     Log.v(TAG, "DEBUG_MEDIA: insert listener, receive metadata: "
@@ -2439,7 +2408,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                         + mMediaController.getPackageName());
             }
             mMediaController.unregisterCallback(mMediaListener);
-            setTrackPlaying();
         }
         mMediaController = null;
     }
@@ -3029,28 +2997,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
         if (mFlashlightController.isAvailable()) {
             mFlashlightController.setFlashlight(!mFlashlightController.isEnabled());
-        }
-    }
-
-    @Override
-    public void toggleNavigationBar(boolean enable) {
-        if (enable) {
-            if (mNavigationBarView == null) {
-                try {
-                    createNavigationBar();
-                    setDoubleTapNavbar();
-                } catch (Exception e) {
-                    // monkey tapping the toggle more times and too fast
-                }
-            }
-        } else {
-            if (mNavigationBarView != null){
-                FragmentHostManager fm = FragmentHostManager.get(mNavigationBarView);
-                mWindowManager.removeViewImmediate(mNavigationBarView);
-                mNavigationBarView = null;
-                fm.getFragmentManager().beginTransaction().remove(mNavigationBar).commit();
-                mNavigationBar = null;
-            }
         }
     }
 
@@ -5673,9 +5619,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -5729,9 +5672,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR))) {
-                setDoubleTapNavbar();
-            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
                 setStatusBarWindowViewOptions();
             } else if (uri.equals(Settings.System.getUriFor(
@@ -5791,7 +5731,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         public void update() {
-            setDoubleTapNavbar();
             setStatusBarWindowViewOptions();
             setLockscreenMediaMetadata();
             setStatusbarBatterySaverColor();
@@ -5809,12 +5748,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mTickerEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_SHOW_TICKER, 1,
                 UserHandle.USER_CURRENT);
-    }
-
-    private void setDoubleTapNavbar() {
-        if (mNavigationBar != null) {
-            mNavigationBar.setDoubleTapToSleep();
-        }
     }
 
     private void setStatusBarWindowViewOptions() {

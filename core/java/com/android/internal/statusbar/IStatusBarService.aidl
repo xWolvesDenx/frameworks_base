@@ -82,5 +82,4 @@ interface IStatusBarService
      * GZOSP
      */
     void toggleCameraFlash();
-    void toggleNavigationBar(boolean enable);
 }

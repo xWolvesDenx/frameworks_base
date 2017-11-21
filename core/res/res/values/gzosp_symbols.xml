@@ -58,10 +58,6 @@
     <java-symbol type="anim" name="recent_screen_fade_out" />
     <java-symbol type="anim" name="recent_enter" />
 
-    <!-- kill app long press back -->
-    <java-symbol type="string" name="app_killed_message" />
-    <java-symbol type="integer" name="config_backKillTimeout" />
-
     <!-- Whether device has dash charging support -->
     <java-symbol type="bool" name="config_hasDashCharger" />
 
