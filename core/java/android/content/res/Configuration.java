@@ -642,7 +642,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public static final int UI_MODE_TYPE_VR_HEADSET = 0x07;
 
     /** Constant for {@link #uiMode}: bits that encode the night mode. */
-    public static final int UI_MODE_NIGHT_MASK = 0x30;
+    public static final int UI_MODE_NIGHT_MASK = 0xf0;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value indicating that no mode type has been set. */
     public static final int UI_MODE_NIGHT_UNDEFINED = 0x00;
@@ -658,10 +658,32 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public static final int UI_MODE_NIGHT_YES = 0x20;
 
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the
-     * <a href="{@docRoot}guide/topics/resources/providing-resources.html#NightQualifier">night</a>
-     * resource qualifier. */
-    public static final int UI_MODE_NIGHT_RETRO = 0x30;
+     * value that corresponds to the NightQualifier "white". */
+    public static final int UI_MODE_NIGHT_WHITE = 0x30;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "red". */
+    public static final int UI_MODE_NIGHT_RED = 0x40;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "mint". */
+    public static final int UI_MODE_NIGHT_MINT = 0x50;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "yellow". */
+    public static final int UI_MODE_NIGHT_YELLOW = 0x60;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "gold". */
+    public static final int UI_MODE_NIGHT_GOLD = 0x70;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "blue". */
+    public static final int UI_MODE_NIGHT_BLUE = 0x80;
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "pink". */
+    public static final int UI_MODE_NIGHT_PINK = 0x90;           
 
     /**
      * Bit mask of the ui mode.  Currently there are two fields:
@@ -1011,7 +1033,13 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case UI_MODE_NIGHT_UNDEFINED: sb.append(" ?night"); break;
             case UI_MODE_NIGHT_NO: /* not-night is not interesting to print */ break;
             case UI_MODE_NIGHT_YES: sb.append(" night"); break;
-            case UI_MODE_NIGHT_RETRO: sb.append(" retro"); break;
+            case UI_MODE_NIGHT_WHITE: sb.append(" white"); break;
+            case UI_MODE_NIGHT_RED: sb.append(" red"); break;
+            case UI_MODE_NIGHT_MINT: sb.append(" mint"); break;
+            case UI_MODE_NIGHT_YELLOW: sb.append(" yellow"); break;
+            case UI_MODE_NIGHT_GOLD: sb.append(" gold"); break;
+            case UI_MODE_NIGHT_BLUE: sb.append(" blue"); break;
+            case UI_MODE_NIGHT_PINK: sb.append(" pink"); break;                           
             default: sb.append(" night="); sb.append(uiMode&UI_MODE_NIGHT_MASK); break;
         }
         switch (touchscreen) {
@@ -2037,9 +2065,27 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case Configuration.UI_MODE_NIGHT_NO:
                 parts.add("notnight");
                 break;
-            case Configuration.UI_MODE_NIGHT_RETRO:
-                parts.add("retro");
+            case Configuration.UI_MODE_NIGHT_WHITE:
+                parts.add("white");
                 break;
+            case Configuration.UI_MODE_NIGHT_RED:
+                parts.add("red");
+                break;
+            case Configuration.UI_MODE_NIGHT_MINT:
+                parts.add("mint");
+                break;
+            case Configuration.UI_MODE_NIGHT_YELLOW:
+                parts.add("yellow");
+                break;
+            case Configuration.UI_MODE_NIGHT_GOLD:
+                parts.add("gold");
+                break;
+            case Configuration.UI_MODE_NIGHT_BLUE:
+                parts.add("blue");
+                break;
+            case Configuration.UI_MODE_NIGHT_PINK:
+                parts.add("pink");
+                break;                                        
             default:
                 break;
         }

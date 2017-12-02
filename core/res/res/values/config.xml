@@ -784,10 +784,15 @@
 
     <!-- Control the default night mode to use when there is no other mode override set.
          One of the following values (see UiModeManager.java):
-             0 - MODE_NIGHT_AUTO
              1 - MODE_NIGHT_NO
              2 - MODE_NIGHT_YES
-    -->
+             3 - MODE_NIGHT_WHITE
+             4 - MODE_NIGHT_RED
+             5 - MODE_NIGHT_MINT
+             6 - MODE_NIGHT_YELLOW
+             7 - MODE_NIGHT_GOLD
+             8 - MODE_NIGHT_BLUE
+             9 - MODE_NIGHT_PINK -->
     <integer name="config_defaultNightMode">1</integer>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently

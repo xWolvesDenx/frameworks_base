@@ -3081,9 +3081,27 @@ String8 ResTable_config::toString() const {
             case ResTable_config::UI_MODE_NIGHT_YES:
                 res.append("night");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_RETRO:
-                res.append("retro");
+            case ResTable_config::UI_MODE_NIGHT_WHITE:
+                res.append("white");
                 break;
+            case ResTable_config::UI_MODE_NIGHT_RED:
+                res.append("red");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_MINT:
+                res.append("mint");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YELLOW:
+                res.append("yellow");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_GOLD:
+                res.append("gold");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_BLUE:
+                res.append("blue");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_PINK:
+                res.append("pink");
+                break;                                      
             default:
                 res.appendFormat("uiModeNight=%d",
                         dtohs(uiMode&MASK_UI_MODE_NIGHT));
