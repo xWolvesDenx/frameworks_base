@@ -304,7 +304,7 @@ final class UiModeManagerService extends SystemService {
                 case UiModeManager.MODE_NIGHT_NO:
                 case UiModeManager.MODE_NIGHT_YES:
                 case UiModeManager.MODE_NIGHT_WHITE:
-                case UiModeManager.MODE_NIGHT_RED:
+                case UiModeManager.MODE_NIGHT_BDRED:
                 case UiModeManager.MODE_NIGHT_MINT:
                 case UiModeManager.MODE_NIGHT_YELLOW:
                 case UiModeManager.MODE_NIGHT_GOLD:

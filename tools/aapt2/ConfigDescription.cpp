@@ -332,10 +332,10 @@ static bool parseUiModeNight(const char* name, ResTable_config* out) {
       out->uiMode = (out->uiMode & ~ResTable_config::MASK_UI_MODE_NIGHT) |
                     ResTable_config::UI_MODE_NIGHT_WHITE;
     return true;
-  } else if (strcmp(name, "red") == 0) {
+  } else if (strcmp(name, "bdred") == 0) {
     if (out)
       out->uiMode = (out->uiMode & ~ResTable_config::MASK_UI_MODE_NIGHT) |
-                    ResTable_config::UI_MODE_NIGHT_RED;
+                    ResTable_config::UI_MODE_NIGHT_BDRED;
     return true;
   } else if (strcmp(name, "mint") == 0) {
     if (out)

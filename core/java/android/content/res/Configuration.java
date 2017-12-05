@@ -663,7 +663,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
 
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "red". */
-    public static final int UI_MODE_NIGHT_RED = 0x40;
+    public static final int UI_MODE_NIGHT_BDRED = 0x40;
 
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "mint". */
@@ -1034,7 +1034,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case UI_MODE_NIGHT_NO: /* not-night is not interesting to print */ break;
             case UI_MODE_NIGHT_YES: sb.append(" night"); break;
             case UI_MODE_NIGHT_WHITE: sb.append(" white"); break;
-            case UI_MODE_NIGHT_RED: sb.append(" red"); break;
+            case UI_MODE_NIGHT_BDRED: sb.append(" bdred"); break;
             case UI_MODE_NIGHT_MINT: sb.append(" mint"); break;
             case UI_MODE_NIGHT_YELLOW: sb.append(" yellow"); break;
             case UI_MODE_NIGHT_GOLD: sb.append(" gold"); break;
@@ -2068,8 +2068,8 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case Configuration.UI_MODE_NIGHT_WHITE:
                 parts.add("white");
                 break;
-            case Configuration.UI_MODE_NIGHT_RED:
-                parts.add("red");
+            case Configuration.UI_MODE_NIGHT_BDRED:
+                parts.add("bdred");
                 break;
             case Configuration.UI_MODE_NIGHT_MINT:
                 parts.add("mint");

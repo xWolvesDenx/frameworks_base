@@ -102,7 +102,7 @@ public class UiModeManager {
              MODE_NIGHT_NO,
              MODE_NIGHT_YES,
              MODE_NIGHT_WHITE,
-             MODE_NIGHT_RED,
+             MODE_NIGHT_BDRED,
              MODE_NIGHT_MINT,
              MODE_NIGHT_YELLOW,
              MODE_NIGHT_GOLD, 
@@ -139,7 +139,7 @@ public class UiModeManager {
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
      * always run in night mode (RED).
      */
-    public static final int MODE_NIGHT_RED = Configuration.UI_MODE_NIGHT_RED >> 4;
+    public static final int MODE_NIGHT_BDRED = Configuration.UI_MODE_NIGHT_BDRED >> 4;
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:

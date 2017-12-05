@@ -3084,7 +3084,7 @@ String8 ResTable_config::toString() const {
             case ResTable_config::UI_MODE_NIGHT_WHITE:
                 res.append("white");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_RED:
+            case ResTable_config::UI_MODE_NIGHT_BDRED:
                 res.append("red");
                 break;
             case ResTable_config::UI_MODE_NIGHT_MINT:
