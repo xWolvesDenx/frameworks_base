@@ -608,8 +608,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private boolean mHandleVolumeKeysInWM;
 
-    int mBackKillTimeout;
-
     int mDeviceHardwareKeys;
 
     int mPointerLocationMode = 0; // guarded by mLock
@@ -1829,7 +1827,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     private final ScreenshotRunnable mScreenshotRunnable = new ScreenshotRunnable();
-    
+
     @Override
     public void showGlobalActions() {
         mHandler.removeMessages(MSG_DISPATCH_SHOW_GLOBAL_ACTIONS);
@@ -2158,13 +2156,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         mHandleVolumeKeysInWM = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_handleVolumeKeysInWindowManager);
 
-        mBackKillTimeout = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_backKillTimeout);
-
         mDeviceHardwareKeys = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
-
-        updateKeyAssignments();
 
         mAccessibilityManager = (AccessibilityManager) context.getSystemService(
                 Context.ACCESSIBILITY_SERVICE);
