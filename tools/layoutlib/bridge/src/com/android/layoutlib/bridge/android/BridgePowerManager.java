@@ -176,9 +176,4 @@ public class BridgePowerManager implements IPowerManager {
     public int getLastShutdownReason() {
         return PowerManager.SHUTDOWN_REASON_UNKNOWN;
     }
-
-    @Override
-    public void setKeyboardVisibility(boolean visible) {
-        // pass for now
-    }
 }
